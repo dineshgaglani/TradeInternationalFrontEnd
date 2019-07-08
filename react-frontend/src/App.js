@@ -13,13 +13,24 @@ class App extends React.Component {
 
   constructor() {
     super()
-    this.state = { userType: "buyer" }
+    this.state = { userType: "buyer", searchTerm: "", partialSearchTerm: "" }
     this.setUserType = this.setUserType.bind(this)
+    this.performSearch = this.performSearch.bind(this)
+    this.setSearchTerm = this.setSearchTerm.bind(this)
   }
 
   setUserType(userType) {
     this.setState(() => { return { userType:  userType.value } } )
-    console.log("Function called with arg " + userType.value)
+    console.log("SetUserType Function called with arg " + userType.value)
+  }
+
+  performSearch(e) {
+    this.setState((prevState) => {return {searchTerm: prevState.partialSearchTerm } })
+    e.preventDefault()
+  }
+
+  setSearchTerm(e) {
+    this.setState( { partialSearchTerm: e.target.value  } )
   }
 
   render() {
@@ -40,7 +51,11 @@ class App extends React.Component {
             </a>
             <p> I am a : </p><Dropdown options={["buyer", "seller"]} value={this.state.userType}
                                        onChange={ (e) => { this.setUserType(e) } } />
-            <SearchRes userType={this.state.userType}/>
+            <form onSubmit={this.performSearch}>
+              <input type="text" onChange={this.setSearchTerm}/>
+              <input type="submit" value="search" />
+            </form>
+            { this.state.searchTerm !== "" ? <SearchRes userType={this.state.userType} searchTerm={this.state.searchTerm}/> : null }
             { this.state.userType === "buyer" ? <ForBuyer userType={this.state.userType}/> : <ForSeller userType={this.state.userType}/> }
           </header>
         </div>
