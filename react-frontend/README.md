@@ -140,3 +140,19 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+#Setup instructions
+
+To Set-up the react-frontend for the "whatscheaperthere" project follow the steps below
+Run the Dockerfile, the docker file will create an image for the react app to be mounted
+Create a container for the image created by the docker file using the command below:
+```
+ cd react-frontend
+ docker run -v /app/node_modules -v %path_to_react-frontend%:/app %image_name%
+```
+
+Or run 
+```
+cd react-frontend
+docker-compose up
+``` 
