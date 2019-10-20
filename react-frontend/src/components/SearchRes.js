@@ -1,8 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function SearchRes(props) {
-    return (<p>For SearchRes for: {props.userType} with term: {props.searchTerm}</p>)
+class SearchRes extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.changeHandler = this.changeHandler.bind(this)
+    };
+
+    changeHandler() {
+       this.props.formClickHandler();
+    }
+
+
+    render() {
+        return (<div><p>For SearchRes for: {this.props.userType} with term: {this.props.searchTerm}</p>
+        <button onClick={this.changeHandler}>clickMe!</button></div>);
+    }
+
 }
 
 export default SearchRes

@@ -13,10 +13,11 @@ class App extends React.Component {
 
   constructor() {
     super()
-    this.state = { userType: "buyer", searchTerm: "", partialSearchTerm: "" }
+    this.state = { userType: "buyer", searchTerm: "", partialSearchTerm: "", dummyObj: "" }
     this.setUserType = this.setUserType.bind(this)
     this.performSearch = this.performSearch.bind(this)
     this.setSearchTerm = this.setSearchTerm.bind(this)
+    this.testfunction = this.testfunction.bind(this)
   }
 
   setUserType(userType) {
@@ -32,6 +33,13 @@ class App extends React.Component {
   setSearchTerm(e) {
     this.setState( { partialSearchTerm: e.target.value  } )
   }
+
+  testfunction() {
+    console.log("changed!")
+    this.setState( {dummyObj : "changed!"} )
+  }
+
+
 
   render() {
     return (
@@ -55,8 +63,9 @@ class App extends React.Component {
               <input type="text" onChange={this.setSearchTerm}/>
               <input type="submit" value="search" />
             </form>
-            { this.state.searchTerm !== "" ? <SearchRes userType={this.state.userType} searchTerm={this.state.searchTerm}/> : null }
+            { this.state.searchTerm !== "" ? <SearchRes userType={this.state.userType} searchTerm={this.state.searchTerm} formClickHandler={this.testfunction}/> : null }
             { this.state.userType === "buyer" ? <ForBuyer userType={this.state.userType}/> : <ForSeller userType={this.state.userType}/> }
+            { this.state.dummyObj !== "" ? <p>changed!</p> : null}
           </header>
         </div>
     );
